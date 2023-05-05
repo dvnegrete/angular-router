@@ -20,6 +20,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TimeInterceptor, multi: true },
