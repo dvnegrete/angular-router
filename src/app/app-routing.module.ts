@@ -6,6 +6,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 //servicio
 import { CustomPreloadService } from './services/custom-preload.service';
+import { AdminGuard } from './guards/admin.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -13,12 +15,13 @@ const routes: Routes = [
     loadChildren: ()=> import('./website/website.module').then( mod => mod.WebsiteModule),
     data:{
       preload: true,
-    }
+    },
   },
-  { 
-    path: 'cms', 
-    loadChildren: ()=> import('./cms/cms.module').then( mod => mod.CmsModule)
-  },
+  // { 
+  //   path: 'cms', 
+  //   loadChildren: ()=> import('./cms/cms.module').then( mod => mod.CmsModule),
+  //   canActivate: [ AdminGuard ],
+  // },
   { path: '**', component: NotFoundComponent } 
 ]
 

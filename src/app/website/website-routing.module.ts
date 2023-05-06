@@ -9,6 +9,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { AuthGuard } from '../guards/auth.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 const routes: Routes = [
   { path: '', component: LayoutComponent, children: 
@@ -28,12 +30,17 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent  },
       { path: 'registro', component: RegisterComponent  },
       { path: 'recovery', component: RecoveryComponent  },
-      { path: 'profile', component: ProfileComponent  },
+      { 
+        path: 'profile', 
+        canActivate: [ AuthGuard ],
+        component: ProfileComponent
+      },
     ] 
   },
   { 
     path: 'cms', 
-    loadChildren: ()=> import('../cms/cms.module').then( mod => mod.CmsModule)
+    loadChildren: ()=> import('../cms/cms.module').then( mod => mod.CmsModule),
+    canActivate: [ AdminGuard ]
   },
   { path: '**', component: NotFoundComponent }  
 ];
