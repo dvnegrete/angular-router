@@ -11,6 +11,7 @@ import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { AdminGuard } from '../guards/admin.guard';
+import { ExitGuard } from '../guards/exit.guard';
 
 const routes: Routes = [
   { path: '', component: LayoutComponent, children: 
@@ -28,7 +29,11 @@ const routes: Routes = [
       { path: 'notFound', component: NotFoundComponent  },
       { path: 'myCart', component: MyCartComponent  },
       { path: 'login', component: LoginComponent  },
-      { path: 'registro', component: RegisterComponent  },
+      { 
+        path: 'registro', 
+        component: RegisterComponent,
+        canDeactivate: [ ExitGuard ]
+      },
       { path: 'recovery', component: RecoveryComponent  },
       { 
         path: 'profile', 
